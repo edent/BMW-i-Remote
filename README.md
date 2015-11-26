@@ -22,23 +22,25 @@ You will need:
 
 1. Your ConnectedDrive registered email address.
 1. Your ConnectedDrive registered password.
-1. The i Remote username.
-1. The i Remote password.
+1. The i Remote API Key.
+1. The i Remote API Secret.
 
 You can get the i Remote details from either decompiling the Android App or from intercepting communications between your phone and the BMW server.  This is left as an exercise for the reader ☺
 
-Firstly, we use <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic authentication</a>.  That means taking the API Key and Secret and Base64 encoding them.
+Firstly, we use [Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).  That means taking the API Key and Secret and Base64 encoding them.
 
-So <code>key:secret</code> becomes <code>a2V5OnNlY3JldA==</code>
+So `key:secret` becomes `a2V5OnNlY3JldA==`
 
-We also need to send the following parameters as <code>Content-Type: application/x-www-form-urlencoded</code>:
+We also need to send the following parameters as 
 
-<pre>
+* `Content-Type: application/x-www-form-urlencoded`
+
+```
  grant_type=password
 &username=whatever%40example.com
 &password=p4ssw0rd
 &scope=remote_services+vehicle_data
-</pre>
+```
 
 Here's how to do it with `curl`:
 
@@ -68,9 +70,9 @@ You **must** include
 
 in your headers with *every* request.
 
-The <code>expires_in</code> is in seconds - giving you 8 hours before you have to renew the token.
+The `expires_in` is in seconds - giving you 8 hours before you have to renew the token.
 
-I've no idea what the <code>refresh_token</code> is for - once the <code>access_token</code> expires, you can simply re-authenticate and gain a new one.
+I've no idea what the `refresh_token` is for. Once the `access_token` expires, you can simply re-authenticate and gain a new one.
 
 ## API
 You **must** include 
@@ -135,12 +137,13 @@ The most important thing here is the VIN - Vehicle Identification Number.  You'l
 ```
 
 #### Values
-* `mileage` is in **Km**
-* `remainingFuel` is in Litres
-* `maxRangeElectric` is in Km
-* `maxRangeElectricMls` is in miles
-* `chargingLevelHv` is the percentage of charge left in the (High voltage?) battery
-* `maxFuel` is in Litres
+* `mileage` is in **Km**.
+* `remainingFuel` is in Litres.
+* `maxRangeElectric` is in Km.
+* `maxRangeElectricMls` is in miles.
+* `chargingLevelHv` is the percentage of charge left in the (**H**igh **v**oltage?) battery.
+* `maxFuel` is in Litres.
+* `heading` is in degrees.
 
 Valid `chargingStatus`es appear to be:
 
@@ -205,11 +208,11 @@ Shows the details about your most recent trip.
 
 Distances appear to be in Kilometres rather than miles, so be sure to adjust accordingly. Multiply by `0.621371` to get miles.
 
-* `totalDistance` is in Km
-* `electricDistance` is in Km
-* `avgElectricConsumption` is in kWh/100Km
-* `avgRecuperation` is in kWh/100Km
-* `duration` is in minutes
+* `totalDistance` is in Km.
+* `electricDistance` is in Km.
+* `avgElectricConsumption` is in kWh/100Km.
+* `avgRecuperation` is in kWh/100Km.
+* `duration` is in minutes.
 
 To convert kWh/100Km to Miles/kWh.
 
@@ -490,19 +493,33 @@ If the vehicle is plugged in, but not charging (due to an off peak setting?) it 
 * `serviceType=CHARGE_NOW`
 
 #### Start Climate Control
+This will activate climate control within your vehicle.
+
+It *appears* to be limited to the last temperature you set when you were in the car. I can't find a way to instruct the car to reach a specific temperature.
+
 * `serviceType=CLIMATE_NOW`
 
 #### Lock the doors
+Performs central locking.
+
 * `serviceType=DOOR_LOCK`
 
 #### Unlock the doors
+This will unlock all the doors on your vehicle.
+
+Please use **extreme caution** when sending this command.  Ensure that you are in sight of the vehicle and are able to lock it if needed.
+
 * `serviceType=DOOR_UNLOCK`
 
 #### Flash the headlights
+If you can't find the vehicle, or need to illuminate something in its vicinity, you can briefly activate the headlights.
+
 * `serviceType=LIGHT_FLASH&count=2`
     * I assume that `count` relates to the number of seconds to keep the light on?
 
 #### Charging Schedule
+Set the peak / off peak charging schedule.
+
 * `serviceType=CHARGING_CONTROL`
     * I haven't bothered to figure this out, but the error it returns should give you some pointers:
 ```
@@ -520,7 +537,7 @@ If the vehicle is plugged in, but not charging (due to an off peak setting?) it 
 
 #### Response
 
-An example response:
+An example response for all `POST` commands:
 ```
 {
     "executionStatus": {
@@ -535,6 +552,4 @@ An example response:
 
 Using these commands you should be able to replicate the functionality of the official app.
 
-If you spot any errors or ommissions, please raise an issue or send a Pull Request.
-
-
+If you spot any errors or omissions, please raise an issue or send a Pull Request.
