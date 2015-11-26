@@ -8,6 +8,49 @@ Your use of these API calls is entirely at your own risk.  They are neither offi
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [BMW i Remote API](#bmw-i-remote-api)
+	- [Description](#description)
+	- [Servers](#servers)
+	- [Authorisation](#authorisation)
+	- [API](#api)
+		- [Get Vehicle Data](#get-vehicle-data)
+			- [Response](#response)
+			- [Values](#values)
+		- [Get Last Trip](#get-last-trip)
+			- [Response](#response)
+			- [Values](#values)
+		- [Get Charging Times](#get-charging-times)
+			- [Response](#response)
+			- [Values](#values)
+		- [Get Vehicle Destinations](#get-vehicle-destinations)
+			- [Response](#response)
+			- [Values](#values)
+		- [Get All Trip Details](#get-all-trip-details)
+			- [Response](#response)
+			- [Values](#values)
+		- [Get Range Map](#get-range-map)
+			- [Response](#response)
+			- [Values](#values)
+	- [Sending information to the car](#sending-information-to-the-car)
+		- [Get Request status](#get-request-status)
+			- [Response](#response)
+			- [Values](#values)
+		- [POST a command](#post-a-command)
+			- [Available Commands](#available-commands)
+			- [Initiate Charging](#initiate-charging)
+			- [Start Climate Control](#start-climate-control)
+			- [Lock the doors](#lock-the-doors)
+			- [Unlock the doors](#unlock-the-doors)
+			- [Flash the headlights](#flash-the-headlights)
+			- [Charging Schedule](#charging-schedule)
+			- [Vehicle Finder](#vehicle-finder)
+			- [Response](#response)
+	- [What's Next?](#whats-next)
+<!-- /TOC -->
+
+
 ## Servers
 There are three API servers.
 
@@ -31,7 +74,7 @@ Firstly, we use [Basic authentication](https://en.wikipedia.org/wiki/Basic_acces
 
 So `key:secret` becomes `a2V5OnNlY3JldA==`
 
-We also need to send the following parameters as 
+We also need to send the following parameters as
 
 * `Content-Type: application/x-www-form-urlencoded`
 
@@ -64,9 +107,9 @@ If everything has worked, you should get back the following JSON:
 }
 ```
 
-You **must** include 
+You **must** include
 
-* `Authorization: Bearer RCQ1hLP4AFaUBW9BjcPUN3i4WgkwF90R` 
+* `Authorization: Bearer RCQ1hLP4AFaUBW9BjcPUN3i4WgkwF90R`
 
 in your headers with *every* request.
 
@@ -75,7 +118,7 @@ The `expires_in` is in seconds - giving you 8 hours before you have to renew the
 I've no idea what the `refresh_token` is for. Once the `access_token` expires, you can simply re-authenticate and gain a new one.
 
 ## API
-You **must** include 
+You **must** include
 
 * `Authorization: Bearer RCQ1hLP4AFaUBW9BjcPUN3i4WgkwF90R`
 
@@ -147,13 +190,13 @@ The most important thing here is the VIN - Vehicle Identification Number.  You'l
 
 Valid `chargingStatus`es appear to be:
 
-* `CHARGING` 
-* `ERROR` 
-* `FINISHED_FULLY_CHARGED` 
-* `FINISHED_NOT_FULL` 
-* `INVALID` 
-* `NOT_CHARGING` 
-* `WAITING_FOR_CHARGING` 
+* `CHARGING`
+* `ERROR`
+* `FINISHED_FULLY_CHARGED`
+* `FINISHED_NOT_FULL`
+* `INVALID`
+* `NOT_CHARGING`
+* `WAITING_FOR_CHARGING`
 
 Valid `connectionStatus`es appear to be:
 
@@ -406,7 +449,7 @@ Generate a polyline displaying the predicted range of the vehicle.
         ]
     }
 }
-           
+
 ```
 #### Values
 
@@ -479,7 +522,7 @@ Instructs the car to perform an action.
 * `/webapi/v1/user/vehicles/:VIN/executeService`
     * Where `:VIN` is your vehicle's VIN.
     * Remember to include the `Authorization: Bearer` header.
-    
+
 #### Available Commands
 These commands are all available via the API, but **may not be supported by your vehicle**.
 
