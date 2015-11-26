@@ -97,7 +97,7 @@ credentials = json.load(in_file)
 in_file.close()
 
 #	If the access_token has expired, generate a new one and use that
-if (time.time() >= credentials["time"]):
+if (time.time() > credentials["time"]):
 	access_token = generateCredentials()
 else:
 	access_token = credentials["access_token"]
@@ -189,12 +189,12 @@ if ( parser.parse(oldUpdateTime) < parser.parse(updateTime) ):
 		updateText ="???"
 
 	#   Set Up Twitter
-	access_token        = credentials["access_token"]
-	access_token_secret = credentials["access_token_secret"]
-	consumer_key        = credentials["consumer_key"]
-	consumer_secret     = credentials["consumer_secret"]
-	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-	auth.set_access_token(access_token, access_token_secret)
+	twitter_access_token        = credentials["twitter_access_token"]
+	twitter_access_token_secret = credentials["twitter_access_token_secret"]
+	twitter_consumer_key        = credentials["twitter_consumer_key"]
+	twitter_consumer_secret     = credentials["twitter_consumer_secret"]
+	auth = tweepy.OAuthHandler(twitter_consumer_key, twitter_consumer_secret)
+	auth.set_access_token(twitter_access_token, twitter_access_token_secret)
 	twitter = tweepy.API(auth)
 
 	#	Generate the Tweet
@@ -210,7 +210,7 @@ if ( parser.parse(oldUpdateTime) < parser.parse(updateTime) ):
 	tweet += u"\nEfficiency: " +str("%.2f" % round(elec,2))  + " miles/kWh"
 	tweet += u"\n🔋 " + str(battery) + "% (" + str("%.0f" % round(electricMiles)) + " miles)"
 	tweet += u"\n🔌 " + chargingText
-	tweet += u"\n⚠: " + updateText
+	tweet += u"\n⚠ " + updateText
 	tweet += u"\n" + "{:,.0f}".format(round(mileage,2)) + " miles total"
 
 	twitter.update_status(tweet)
