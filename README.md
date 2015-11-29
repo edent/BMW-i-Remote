@@ -1,5 +1,5 @@
 # BMW i Remote API
-A reverse engineered interface for the BMW i3 Electric Car.
+A reverse engineered interface for the BMW i3 Electric Car, created initially by Terence Eden, with some code modified by Quentin Stafford-Fraser.
 
 ## Description
 These API calls are designed to allow you to interact with your BMW i3.  They were reverse engineered from [the official BMW i Remote Android app](https://play.google.com/store/apps/details?id=com.bmwi.remote).
