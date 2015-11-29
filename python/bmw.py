@@ -3,6 +3,10 @@
 # Use the BMW ConnectedDrive API using credentials from credentials.json
 # You can see what should be in there by looking at credentials.json.sample.
 #
+# 'auth_basic' is the base64-encoded version of API key:API secret
+# You can capture it if you can intercept the traffic from the app at
+# the time when reauthentication is happening.
+#
 # Based on the excellent work by Terence Eden:
 # https://github.com/edent/BMW-i-Remote
 
@@ -15,15 +19,19 @@ ROOT_URL     = "https://b2vapi.bmwgroup.com/webapi"
 API_ROOT_URL = ROOT_URL + '/v1' 
 
 # What are we pretending to be? Not sure if this is important.
-# Might be tied to OAuth consumer (auth_basic) credentials.
+# Might be tied to OAuth consumer (auth_basic) credentials?
 USER_AGENT = "MCVApp/1.5.2 (iPhone; iOS 9.1; Scale/2.00)"
 # USER_AGENT = "Dalvik/2.1.0 (Linux; U; Android 5.1.1; Nexus 6 Build/LMY48Y)"
 
-#   Constants
+# Constants
+#   To convert km to miles:
+#   miles = km * KM_TO_MILES
 KM_TO_MILES  = 0.621371
+#   To convert kWh/100Km to Miles/kWh:
+#   1 / (EFFICIENCY * avgElectricConsumption)`
 EFFICIENCY = 0.01609344
 
-# Not quite using this yet.
+# For future use
 class ConnectedDriveException(Exception):
     pass
 
