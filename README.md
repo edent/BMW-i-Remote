@@ -197,7 +197,7 @@ Valid `connectionStatus`es appear to be:
 * `CHARGING_DONE`
 * `CHARGING_INTERRUPED` [sic]
 * `CHARGING_PAUSED`
-* `CHARGIN_STARTED` [sic]
+* `CHARGIN_STARTED` [sic] **TYPO** should be `CHARGING_STARTED`
 * `CYCLIC_RECHARGING`
 * `DOOR_STATE_CHANGED`
 * `NO_CYCLIC_RECHARGING`
@@ -451,9 +451,9 @@ Generate a polyline displaying the predicted range of the vehicle.
 * `COMFORT` driving using comfort mode.
 
 ## Sending information to the car
-Sending information to the car is slightly complicated.  
+Sending information to the car is slightly complicated.
 
-Your app communicates with the API, the API then communicates with the car's 3G modem, then you have to wait for a response.  
+Your app communicates with the API, the API then communicates with the car's 3G modem, then you have to wait for a response.
 
 If your car is in poor coverage, you can expect significant latency.  Often much higher than a typical timeout will allow for.
 
