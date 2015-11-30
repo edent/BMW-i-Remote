@@ -501,6 +501,8 @@ The following are valid `:SERVICE` types, but **may not be supported by your veh
 * `GET_VEHICLE_IMAGE`
 * `GET_VEHICLE_STATUS`
 * `HORN_BLOW`
+	* This is disabled in the UK market.  It *may* be possible to [enable this by registering on the German ConnectedDrive service](https://speakev.com/threads/introducing-the-tweeting-i3.13177/#post-206168).
+	* **NOTE** The [UK Highway Code says you may not use the horn *unless* moving (Rule 112)](https://www.gov.uk/guidance/the-highway-code/general-rules-techniques-and-advice-for-all-drivers-and-riders-103-to-158).
 * `LIGHT_FLASH`
 * `LOCAL_SEARCH`
 * `LOCAL_SEARCH_SUGGESTIONS`
