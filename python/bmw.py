@@ -97,24 +97,40 @@ class ConnectedDrive(object):
             json.dump(credentials, credentials_file, indent=4)                                    
 
 
-    def call(self, path):
-    	"""
-    	Call the API at the given path.
+    def call(self, path, post_data=None):
+        """
+        Call the API at the given path.
 
-    	Argument should be relative to the API base URL, e.g:
-    	
-    	    print c.call('/user/vehicles/')
+        Argument should be relative to the API base URL, e.g:
+        
+            print c.call('/user/vehicles/')
 
-    	"""
-    	# 
+        If a dictionary 'post_data' is specified, the request will be
+        a POST, otherwise a GET.
+        """
+        # 
         if (time.time() > self.token_expiry):
             self.generateCredentials()
 
         headers = {"Authorization": "Bearer " + self.access_token, 
                    "User-Agent":USER_AGENT}
 
-        r = requests.get(API_ROOT_URL + path,  headers=headers)
+        if post_data is None:
+            r = requests.get(API_ROOT_URL + path,  headers=headers)
+        else:
+            r = requests.post(API_ROOT_URL + path,  headers=headers, data=post_data)
         return r.json()
+
+
+    def executeService(self, vin, serviceType):
+        """
+        Post a request for the specified service. e.g.
+
+            print c.executeService(vin, 'DOOR_LOCK')
+
+        """
+        return self.call("/user/vehicles/{}/executeService".format(vin),
+            {'serviceType': serviceType})
        
 
 # A simple test example
