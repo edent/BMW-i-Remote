@@ -182,7 +182,7 @@ The most important thing here is the VIN - Vehicle Identification Number.  You'l
 * `maxFuel` is in Litres.
 * `heading` is in degrees.
 
-Valid `chargingStatus`es appear to be:
+Valid `chargingStatus` values appear to be:
 
 * `CHARGING`
 * `ERROR`
@@ -192,13 +192,14 @@ Valid `chargingStatus`es appear to be:
 * `NOT_CHARGING`
 * `WAITING_FOR_CHARGING`
 
-Valid `connectionStatus`es appear to be:
+Valid `connectionStatus` values appear to be:
 
 * `CHARGING_DONE`
 * `CHARGING_INTERRUPED` [sic]
 * `CHARGING_PAUSED`
 * `CHARGIN_STARTED` [sic]
 * `CYCLIC_RECHARGING`
+* `DISCONNECTED`
 * `DOOR_STATE_CHANGED`
 * `NO_CYCLIC_RECHARGING`
 * `NO_LSC_TRIGGER`
@@ -211,6 +212,12 @@ Valid `connectionStatus`es appear to be:
 * `VEHICLE_SHUTDOWN`
 * `VEHICLE_SHUTDOWN_SECURED`
 * `VEHICLE_UNSECURED`
+
+Valid `doorLockState` values appear to be:
+
+* `UNLOCKED`
+* `LOCKED`  (remotely)
+* `SECURED` (with key fob)
 
 ### Get Last Trip
 Shows the details about your most recent trip.
