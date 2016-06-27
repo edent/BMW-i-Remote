@@ -123,8 +123,68 @@ in your headers with *every* request.
 * `/webapi/v1/user/vehicles/`
     * Remember to include the `Authorization: Bearer` header.
 
+#### Response
+
+Returns a list of entries, one per registered vehicle.
+```
+[
+  {
+    "remote360": "NOT_SUPPORTED",
+    "chargingControl": "WEEKLY_PLANNER",
+    "countryCode": "V1-UK",
+    "hornBlow": "NOT_SUPPORTED",
+    "brand": "BMW_I",
+    "smartSolution": "NOT_SUPPORTED",
+    "hasAlarmSystem": true,
+    "climateControl": "NOT_SUPPORTED",
+    "doorUnlock": "ACTIVATED",
+    "rangeMap": "RANGE_POLYGON",
+    "climateFunction": "AIRCONDITIONING",
+    "lscType": "I_LSC_IMM",
+    "hub": "HUB_ECE",
+    "statisticsAvailable": true,
+    "doorLock": "ACTIVATED",
+    "intermodalRouting": "AVAILABLE",
+    "model": "I3 +REX",
+    "vehicleFinder": "ACTIVATED",
+    "color": "SOLARORANGE MET. M. AKZE",
+    "vin": "WAB1C23456V123456",
+    "bodytype": "I01",
+    "chargeNow": "NOT_SUPPORTED",
+    "supportedChargingModes": [
+      "AC_LOW",
+      "AC_HIGH",
+      "DC"
+    ],
+    "sendPoi": "ACTIVATED",
+    "yearOfConstruction": 2014,
+    "climateNow": "ACTIVATED",
+    "lightFlash": "ACTIVATED",
+    "driveTrain": "BEV_REX",
+    "licensePlate": "AB64 1BC",
+    "statisticsCommunityEnabled": true,
+    "colorCode": "B78",
+    "onlineSearchMode": "MAP",
+    "dealer": {
+      "name": "BMW UK Ltd",
+      "country": "GB",
+      "postalCode": "GU14 0FB",
+      "city": "Farnborough",
+      "street": "Summit ONE"
+    },
+    "lastDestinations": "SUPPORTED"
+  }
+]
+```
+
 The most important thing here is the VIN - Vehicle Identification Number.  You'll need that for all the other API calls <strong>as well as the</strong> Authorization Bearer.
 
+### Get Vehicle Status
+
+* `/webapi/v1/user/vehicles/:VIN/status`
+    * Where `:VIN` is your vehicle's VIN.
+    * Remember to include the `Authorization: Bearer` header.
+    
 #### Response
 ```
 {
@@ -182,7 +242,7 @@ The most important thing here is the VIN - Vehicle Identification Number.  You'l
 * `maxFuel` is in Litres.
 * `heading` is in degrees.
 
-Valid `chargingStatus`es appear to be:
+Valid `chargingStatus` values appear to be:
 
 * `CHARGING`
 * `ERROR`
@@ -192,13 +252,14 @@ Valid `chargingStatus`es appear to be:
 * `NOT_CHARGING`
 * `WAITING_FOR_CHARGING`
 
-Valid `connectionStatus`es appear to be:
+Valid `connectionStatus` values appear to be:
 
 * `CHARGING_DONE`
 * `CHARGING_INTERRUPED` [sic]
 * `CHARGING_PAUSED`
 * `CHARGIN_STARTED` [sic] **TYPO** should be `CHARGING_STARTED`
 * `CYCLIC_RECHARGING`
+* `DISCONNECTED`
 * `DOOR_STATE_CHANGED`
 * `NO_CYCLIC_RECHARGING`
 * `NO_LSC_TRIGGER`
@@ -211,6 +272,12 @@ Valid `connectionStatus`es appear to be:
 * `VEHICLE_SHUTDOWN`
 * `VEHICLE_SHUTDOWN_SECURED`
 * `VEHICLE_UNSECURED`
+
+Valid `doorLockState` values appear to be:
+
+* `UNLOCKED`
+* `LOCKED`  (remotely)
+* `SECURED` (with key fob)
 
 ### Get Last Trip
 Shows the details about your most recent trip.
