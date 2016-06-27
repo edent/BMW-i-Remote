@@ -123,8 +123,68 @@ in your headers with *every* request.
 * `/webapi/v1/user/vehicles/`
     * Remember to include the `Authorization: Bearer` header.
 
+#### Response
+
+Returns a list of entries, one per registered vehicle.
+```
+[
+  {
+    "remote360": "NOT_SUPPORTED",
+    "chargingControl": "WEEKLY_PLANNER",
+    "countryCode": "V1-UK",
+    "hornBlow": "NOT_SUPPORTED",
+    "brand": "BMW_I",
+    "smartSolution": "NOT_SUPPORTED",
+    "hasAlarmSystem": true,
+    "climateControl": "NOT_SUPPORTED",
+    "doorUnlock": "ACTIVATED",
+    "rangeMap": "RANGE_POLYGON",
+    "climateFunction": "AIRCONDITIONING",
+    "lscType": "I_LSC_IMM",
+    "hub": "HUB_ECE",
+    "statisticsAvailable": true,
+    "doorLock": "ACTIVATED",
+    "intermodalRouting": "AVAILABLE",
+    "model": "I3 +REX",
+    "vehicleFinder": "ACTIVATED",
+    "color": "SOLARORANGE MET. M. AKZE",
+    "vin": "WAB1C23456V123456",
+    "bodytype": "I01",
+    "chargeNow": "NOT_SUPPORTED",
+    "supportedChargingModes": [
+      "AC_LOW",
+      "AC_HIGH",
+      "DC"
+    ],
+    "sendPoi": "ACTIVATED",
+    "yearOfConstruction": 2014,
+    "climateNow": "ACTIVATED",
+    "lightFlash": "ACTIVATED",
+    "driveTrain": "BEV_REX",
+    "licensePlate": "AB64 1BC",
+    "statisticsCommunityEnabled": true,
+    "colorCode": "B78",
+    "onlineSearchMode": "MAP",
+    "dealer": {
+      "name": "BMW UK Ltd",
+      "country": "GB",
+      "postalCode": "GU14 0FB",
+      "city": "Farnborough",
+      "street": "Summit ONE"
+    },
+    "lastDestinations": "SUPPORTED"
+  }
+]
+```
+
 The most important thing here is the VIN - Vehicle Identification Number.  You'll need that for all the other API calls <strong>as well as the</strong> Authorization Bearer.
 
+### Get Vehicle Status
+
+* `/webapi/v1/user/vehicles/:VIN/status`
+    * Where `:VIN` is your vehicle's VIN.
+    * Remember to include the `Authorization: Bearer` header.
+    
 #### Response
 ```
 {
