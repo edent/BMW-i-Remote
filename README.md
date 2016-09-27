@@ -43,6 +43,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		- [Charging Schedule](#charging-schedule)
 		- [Vehicle Finder](#vehicle-finder)
 		- [Response](#response)
+	- [Send POI](#send-poi)
+		- [Body](#body)
+		- [Response](#response)
 - [What's Next?](#whats-next)
 
 ## Servers
@@ -653,6 +656,32 @@ An example response for all `POST` commands:
     }
 }
 ```
+
+### Send POI
+
+Sending a POI to the car.
+
+* `POST /webapi/v1/user/vehicles/:VIN/snedpoi`
+    * Where `:VIN` is your vehicle's VIN.
+    * Remember to include the `Authorization: Bearer` header.
+    * Remember to include the `Content-Type: application/x-www-form-urlencode` header.
+
+#### Body
+```
+body={
+	"poi": {
+		"city": "abc",
+		"lat": nn.nnn,
+		"lon": nn.nnn,
+		"name": "name",
+		"rating": -1,
+		"postalCode": "12345",
+		"street": "Musterstr. 6"
+	}
+}
+```
+#### Response
+HTTP 204
 
 ## What's Next?
 
