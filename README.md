@@ -659,7 +659,7 @@ An example response for all `POST` commands:
 
 ### Send POI
 
-Send an POI to the car
+Sending a POI to the car.
 
 * `POST /webapi/v1/user/vehicles/:VIN/snedpoi`
     * Where `:VIN` is your vehicle's VIN.
