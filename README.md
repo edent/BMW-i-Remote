@@ -675,7 +675,7 @@ body={
 		"lon": nn.nnn,
 		"name": "name",
 		"rating": -1,
-		"postalCode: 12345,
+		"postalCode": "12345",
 		"street": "Musterstr. 6"
 	}
 }
