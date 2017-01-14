@@ -692,7 +692,7 @@ An example response for all `POST` commands:
 
 Sending a POI to the car.
 
-* `POST /webapi/v1/user/vehicles/:VIN/snedpoi`
+* `POST /webapi/v1/user/vehicles/:VIN/sendpoi`
     * Where `:VIN` is your vehicle's VIN.
     * Remember to include the `Authorization: Bearer` header.
     * Remember to include the `Content-Type: application/x-www-form-urlencode` header.
