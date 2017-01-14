@@ -231,6 +231,7 @@ The most important thing here is the VIN - Vehicle Identification Number.  You'l
             "heading": 211,
             "status": "OK"
         },
+        "chargingTimeRemaining": 45,
         "internalDataTimeUTC": "2015-10-30T18:47:44"
     }
 }
@@ -244,6 +245,7 @@ The most important thing here is the VIN - Vehicle Identification Number.  You'l
 * `chargingLevelHv` is the percentage of charge left in the (**H**igh **v**oltage?) battery.
 * `maxFuel` is in Litres.
 * `heading` is in degrees.
+* `chargingTimeRemaining` is in minutes. Please mind that this value is _only_ available if car is actively charging otherwise it is _not_ present in the response.
 
 Valid `chargingStatus` values appear to be:
 
