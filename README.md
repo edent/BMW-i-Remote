@@ -187,7 +187,7 @@ The most important thing here is the VIN - Vehicle Identification Number.  You'l
 * `/webapi/v1/user/vehicles/:VIN/status`
     * Where `:VIN` is your vehicle's VIN.
     * Remember to include the `Authorization: Bearer` header.
-    
+
 #### Response
 ```
 {
@@ -630,14 +630,43 @@ If you can't find the vehicle, or need to illuminate something in its vicinity, 
 Set the peak / off peak charging schedule.
 
 * `serviceType=CHARGING_CONTROL`
-    * I haven't bothered to figure this out, but the error it returns should give you some pointers:
+    * Additional data needs to be sent as parameter `data` in JSON format. The data itself is the same as returned by [Get Charging Times](#get-charging-times).
+    * Instead of `weeklyPlanner` `twoTimesTimer` can be used. Format of data currently unknown.
 ```
-{
-   "error":{
-      "code":500,
-      "description":"(SmartPhoneUtil-A-102) Bad value(s) for parameter(s): Invalid chargingProfile, expected weeklyPlanner or twoTimesTimer"
-   }
-}
+# Notes:
+# - Linebreaks for "data" have been added for readability only.
+curl -i \
+  -X POST \
+  -H "Content-Type: application/x-www-form-urlencode" \
+  --data-urlencode 'serviceType=CHARGING_CONTROL' \
+  --data-urlencode 'data={
+    "weeklyPlanner":
+      {
+        "climatizationEnabled": true,
+        "chargingMode": "IMMEDIATE_CHARGING",
+        "chargingPreferences": "CHARGING_WINDOW",
+        "timer1":{
+          "departureTime": "12:30",
+          "timerEnabled": true,
+          "weekdays": []
+        },
+        "timer2":{
+          "weekdays": []
+        },
+        "timer3":{
+          "departureTime": "19:30",
+          "timerEnabled": false,
+          "weekdays": []
+        },
+        "overrideTimer": {
+          "weekdays": []
+        },
+        "preferredChargingWindow": {
+          "enabled": false,
+          "startTime": "00:00",
+          "endTime": "00:00"
+        }}}' \
+  https://b2vapi.bmwgroup.com/webapi/v1/user/vehicles/:VIN/executeService
 ```
 
 #### Vehicle Finder
