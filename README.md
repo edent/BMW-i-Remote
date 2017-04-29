@@ -622,6 +622,14 @@ Please use **extreme caution** when sending this command.  Ensure that you are i
 
 * `serviceType=DOOR_UNLOCK`
 
+If you recievce an error after DOOR_UNLOCK that looks like 
+```{"error":{"code":500,"description":"(SmartPhoneUtil-A-2013) Action is forbidden. secretKnowledge is missing but required!"}}```
+
+An addition field must be included
+* `serviceType=DOOR_UNLOCK`
+* `bmwSkAnswer=BMW_ACCOUNT_SECURITY_QUESTION_ANSWER`
+
+
 #### Flash the headlights
 If you can't find the vehicle, or need to illuminate something in its vicinity, you can briefly activate the headlights.
 
