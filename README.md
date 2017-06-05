@@ -452,6 +452,7 @@ Shows the statistics for all trips taken in the vehicle.
             "communityHigh": 6.2,
             "userAverage": 0.36
         },
+        "batterySizeMax": 35820,
         "savedCO2": 87.58,
         "savedCO2greenEnergy": 515.177,
         "totalSavedFuel": 0,
@@ -463,6 +464,9 @@ Shows the statistics for all trips taken in the vehicle.
 
 * `chargecycleRange` is in Km.
 * `totalElectricDistance` is in Km.
+* `savedCO2` is in kg.
+* `savedCO2greenEnergy` is in kg.
+* `batterySizeMax`is in Wh.
 
 I'm not sure what units of the other values are.
 
