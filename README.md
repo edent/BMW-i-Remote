@@ -29,6 +29,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	- [Get Range Map](#get-range-map)
 		- [Response](#response)
 		- [Values](#values)
+	- [Get misc SoC data](#get-misc-soc-data)
+		- [Response](#response)
+		- [Values](#values)	
 - [Sending information to the car](#sending-information-to-the-car)
 	- [Get Request status](#get-request-status)
 		- [Response](#response)
@@ -525,6 +528,47 @@ Generate a polyline displaying the predicted range of the vehicle.
 
 * `ECO_PRO_PLUS` driving using the efficient Eco mode.
 * `COMFORT` driving using comfort mode.
+
+### Get misc SoC Data
+Get maximum state of charge of your battery and some redundant data.
+
+The URL is different from the other API servers:
+* `https://www.bmw-connecteddrive.de/api/vehicle/navigation/v1/VIN`
+    * Where `VIN` is your vehicle's VIN.
+    * Use the same `Authorization: Bearer` header as with API Server
+
+#### Response
+```
+example data from a PHEV:
+{
+  "latitude" : 62.250584,
+  "longitude" : 3.7717776,
+  "isoCountryCode" : "DEU",
+  "auxPowerRegular" : 1.4,
+  "auxPowerEcoPro" : 1.2,
+  "auxPowerEcoProPlus" : 0.4,
+  "soc" : 4.019000053405762,
+  "socMax" : 5.6,
+  "eco" : "1c94,1206,d9d,d0f,cd3,cf9,e2d,f49,10ec,10ec,117c",
+  "norm" : "1e15,12f9,e54,dbf,d82,da7,eed,1017,11d0,1483,19a9",
+  "ecoEv" : "c31,799,5c5,5a5,5ae,5fc,6fb,861,9df,9df,9df",
+  "normEv" : "cd5,800,613,5f1,5fc,64c,759,8d2,a65,bf8,e7d",
+  "vehicleMass" : "1560",
+  "kAccReg" : "1440000",
+  "kDecReg" : "3420000",
+  "kAccEco" : "1548000",
+  "kDecEco" : "3240000",
+  "kUp" : "1800000",
+  "kDown" : "2700000",
+  "driveTrain" : "phev_otto",
+  "pendingUpdate" : false,
+  "vehicleTracking" : true
+}
+```
+#### Values
+
+* `socMax` current maximum charge. kind of health check of you battery
+
 
 ## Sending information to the car
 Sending information to the car is slightly complicated.
