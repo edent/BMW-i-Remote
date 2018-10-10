@@ -15,8 +15,12 @@ import requests
 import time
 
 #   API Gateway
-ROOT_URL     = "https://b2vapi.bmwgroup.com/webapi"
-API_ROOT_URL = ROOT_URL + '/v1' 
+#   North America: b2vapi.bmwgroup.us
+#   Rest of World: b2vapi.bmwgroup.com
+#   China: b2vapi.bmwgroup.cn:8592
+SERVER		 = "b2vapi.bmwgroup.us"
+AUTH_URL	 = 'https://' + SERVER + '/gcdm/oauth/token'
+API_ROOT_URL = 'https://' + SERVER + '/webapi/v1'
 
 # What are we pretending to be? Not sure if this is important.
 # Might be tied to OAuth consumer (auth_basic) credentials?
@@ -72,7 +76,7 @@ class ConnectedDrive(object):
             "scope": "remote_services vehicle_data"
         }
 
-        r = requests.post(ROOT_URL + "/oauth/token/",  data=data, headers=headers)
+        r = requests.post(AUTH_URL,  data=data, headers=headers)
         json_data = r.json()
         
         #   Get the access token
