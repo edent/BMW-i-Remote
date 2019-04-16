@@ -14,7 +14,7 @@ import sys
 c = bmw.ConnectedDrive()
 
 #	Get the VIN
-vehicle_json = c.call("/user/vehicles/")
+vehicle_json = c.call("/user/vehicles")
 vin = vehicle_json["vehicles"][0]["vin"]
 
 #	Details about last trip
