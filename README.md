@@ -691,7 +691,6 @@ Set the peak / off peak charging schedule.
 
 * `serviceType=CHARGING_CONTROL`
     * Additional data needs to be sent as parameter `data` in JSON format. The data itself is the same as returned by [Get Charging Times](#get-charging-times).
-    * Instead of `weeklyPlanner` `twoTimesTimer` can be used. Format of data currently unknown.
 ```
 # Notes:
 # - Linebreaks for "data" have been added for readability only.
@@ -723,6 +722,35 @@ curl -i \
         },
         "preferredChargingWindow": {
           "enabled": false,
+          "startTime": "00:00",
+          "endTime": "00:00"
+        }}}' \
+  https://b2vapi.bmwgroup.com/webapi/v1/user/vehicles/:VIN/executeService
+```
+
+    * Instead of `weeklyPlanner` `twoTimesTimer` can be used. 
+```
+# Notes:
+# - Linebreaks for "data" have been added for readability only.
+curl -i \
+  -X POST \
+  -H "Content-Type: application/x-www-form-urlencode" \
+  --data-urlencode 'serviceType=CHARGING_CONTROL' \
+  --data-urlencode 'data={
+    "twoTimesTimer":
+      {
+        "climatizationEnabled": true,
+        "chargingMode": "DELAYED_CHARGING",
+        "chargingPreferences": "CHARGING_WINDOW",
+        "timer1":{
+          "departureTime": "12:30",
+          "timerEnabled": true,
+        },
+        "timer2":{
+          "departureTime": "13:30",
+          "timerEnabled": false,
+        },
+        "preferredChargingWindow": {
           "startTime": "00:00",
           "endTime": "00:00"
         }}}' \
