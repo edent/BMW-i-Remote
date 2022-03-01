@@ -135,6 +135,17 @@ class ConnectedDrive(object):
         """
         return self.call("/user/vehicles/{}/executeService".format(vin),
             {'serviceType': serviceType})
+
+    def executeService2(self, vin, serviceType, bmwSkAnswer):
+        """
+        Post a request for the specified service that requires an answer (i.e. unlock)
+
+            print c.executeService2(vin, 'DOOR_UNLOCK', secret)
+
+        """
+        return self.call("/user/vehicles/{}/executeService".format(vin),
+            {'serviceType': serviceType,
+             'bmwSkAnswer': bmwSkAnswer})
        
 
 # A simple test example

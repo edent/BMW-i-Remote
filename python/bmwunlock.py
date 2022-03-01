@@ -12,14 +12,13 @@ c = bmw.ConnectedDrive()
 resp = c.call('/user/vehicles')
 vin = resp['vehicles'][0]['vin']
 
-service = 'LIGHT_FLASH'  # or DOOR_LOCK, DOOR_UNLOCK etc
-print "Sending {} request...".format(service)
-resp = c.executeService(vin, service)
+service = 'DOOR_UNLOCK'  # or DOOR_LOCK, DOOR_UNLOCK etc
+secret = 'My Super Secret Unlock Passcode'
+resp = c.executeService2(vin, service, secret)
 status = resp['executionStatus']['status']
 while status in ('INITIATED','PENDING'):
     print status
     time.sleep(2)
     check = c.call('/user/vehicles/{}/serviceExecutionStatus?serviceType={}'.format(vin, service))
     status = check['executionStatus']['status']
-
 print status
